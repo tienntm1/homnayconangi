@@ -58,17 +58,28 @@ const defaultArticles = [
 3. Ăn dặm tự chỉ huy (BLW): Bé tự cầm nắm thức ăn thô.`
   },
   {
-    id: 'a4', title: 'Xử Trí Nhanh Khi Trẻ Bị Sốt Cao Co Giật', category: 'Sức Khoẻ & Y Tế', image_url: 'https://images.unsplash.com/photo-1502740479091-635887520276?w=800&q=80', summary: 'Sốt cao co giật là tình trạng nguy hiểm nhưng thường gặp ở trẻ nhỏ. Mẹ cần nắm rõ các bước sơ cứu an toàn.', icon: '🌡️',
-    content: `Co giật do sốt thường xảy ra ở trẻ từ 6 tháng đến 5 tuổi.
-**Cần làm ngay:**
-- Đặt trẻ nằm nghiêng trên mặt phẳng an toàn để tránh sặc.
-- Nới lỏng quần áo, cởi bớt đồ.
-- Đếm thời gian co giật (thường dưới 5 phút).
-**Tuyệt đối KHÔNG:**
-- KHÔNG vắt chanh vào miệng trẻ.
-- KHÔNG đưa tay hay bất cứ vật gì vào miệng trẻ (sẽ gây ngạt hoặc gãy răng).
-- KHÔNG ôm chặt giữ bé lại.
-*Sau cơn co giật, hãy đưa trẻ đến bệnh viện ngay lập tức để kiểm tra.*`
+    id: 'a4', title: 'Bảng Chiều Cao Cân Nặng Chuẩn Theo Tổ Chức Y Tế Thế Giới (WHO)', category: 'Sự Phát Triển', image_url: 'https://images.unsplash.com/photo-1502740479091-635887520276?w=800&q=80', summary: 'Tra cứu nhanh xem bé có đang phát triển đạt chuẩn hay không để có sự điều chỉnh dinh dưỡng kịp thời.', icon: '📈',
+    content: `Theo dõi biểu đồ tăng trưởng là cách tốt nhất để biết bé có khỏe mạnh không. Dưới đây là bảng tiêu chuẩn của WHO:
+
+### Bảng Chuẩn Bé Trai 👦
+| Tháng tuổi | Cân nặng (kg) | Chiều cao (cm) |
+|:---:|:---:|:---:|
+| **Sơ sinh** | 3.3 | 49.9 |
+| **6 tháng** | 7.9 | 67.6 |
+| **12 tháng** | 9.6 | 75.7 |
+| **2 tuổi** | 12.2 | 87.8 |
+| **3 tuổi** | 14.3 | 96.1 |
+
+### Bảng Chuẩn Bé Gái 👧
+| Tháng tuổi | Cân nặng (kg) | Chiều cao (cm) |
+|:---:|:---:|:---:|
+| **Sơ sinh** | 3.2 | 49.1 |
+| **6 tháng** | 7.3 | 65.7 |
+| **12 tháng** | 8.9 | 74.0 |
+| **2 tuổi** | 11.5 | 86.4 |
+| **3 tuổi** | 13.9 | 95.1 |
+
+> *Lưu ý: Sự dao động xung quanh mức trung bình (±10%) là hoàn toàn bình thường. Điều quan trọng là bé phát triển đều đặn theo đường cong sinh trưởng của riêng mình.*`
   },
   {
     id: 'a5', title: 'Hiểu Về Tuần Khủng Hoảng (Wonder Weeks)', category: 'Tâm Lý & Sinh Hoạt', image_url: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80', summary: 'Tại sao tự nhiên em bé lại quấy khóc, biếng ăn, khó ngủ? Đó có thể là do Wonder Weeks.', icon: '🌪️',
@@ -85,11 +96,30 @@ Hãy ôm ấp con nhiều hơn. Đây là lúc não con đang nâng cấp. Khi v
     id: 'a6', title: 'Chăm Sóc Răng Miệng Cho Bé Từ Khi Chưa Mọc Răng', category: 'Sức Khoẻ & Y Tế', image_url: 'https://images.unsplash.com/photo-1509048191080-d2984bad6ae5?w=800&q=80', summary: 'Nhiều mẹ nghĩ có răng mới cần đánh răng, nhưng thực tế việc vệ sinh nướu cần làm từ lúc sơ sinh.', icon: '🦷',
     content: `Việ vệ sinh miệng sớm giúp phòng ngừa nấm miệng và tạo thói quen tốt cho trẻ sau này.
 **Từ 0-6 tháng (chưa mọc răng):**
-Dùng gạc rơ lưỡi nhúng nước muối sinh lý ấm, lau nhẹ nhàng nướu và lưỡi bé mỗi ngày 1-2 lần (tốt nhất là sau khi bú hoặc khi tắm).
+Dùng gạc rơ lưỡi nhúng nước muối sinh lý ấm, lau nhẹ nhàng nướu và lưỡi bé mỗi ngày 1-2 lần.
 **Khi có chiếc răng đầu tiên:**
-Sử dụng bàn chải silicon mềm hoặc bàn chải xỏ ngón. Có thể bắt đầu dùng kem đánh răng trẻ em (lượng bằng hạt gạo) loại có thể nuốt được.
+Sử dụng bàn chải silicon mềm hoặc bàn chải xỏ ngón. Bắt đầu dùng kem đánh răng trẻ em (bằng hạt gạo).
 **Khi trẻ 2-3 tuổi:**
-Dạy trẻ tự chải răng ngày 2 lần. Hãy biến việc đánh răng thành một trò chơi vui nhộn nhé!`
+Dạy trẻ tự chải răng ngày 2 lần. Biến việc đánh răng thành một trò chơi vui nhộn!`
+  },
+  {
+    id: 'a7', title: 'Hướng Dẫn Mát-xa (Massage) Cho Bé Sơ Sinh', category: 'Chăm Sóc', image_url: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80', summary: 'Massage hàng ngày không chỉ giúp bé thư giãn, ngủ ngon mà còn tăng cường sự gắn kết mẫu tử.', icon: '💆',
+    content: `Massage là ngôn ngữ yêu thương tuyệt vời nhất mẹ dành cho bé trong những tháng đầu đời.
+
+**Lợi ích tuyệt vời:**
+- Giúp bé thư giãn, giảm quấy khóc.
+- Kích thích hệ tiêu hóa (đặc biệt các bài tập đạp xe giúp giảm đầy hơi, táo bón).
+- Tăng cường tuần hoàn máu và hệ miễn dịch.
+
+**Quy trình chuẩn bị:**
+1. Phòng ấm áp (khoảng 25-27 độ C), yên tĩnh, có thể mở nhạc không lời nhẹ nhàng.
+2. Mẹ tháo trang sức, cắt ngắn móng tay, rửa tay sạch và xoa ấm tay.
+3. Sử dụng dầu massage chuyên dụng cho em bé (như dầu hướng dương, dầu dừa hữu cơ).
+
+**Các bước cơ bản:**
+- **Chân & Tay**: Vuốt dọc từ đùi xuống gót chân, nắn nhẹ các ngón chân. Lặp lại với tay.
+- **Bụng**: Xoa quanh rốn theo chiều kim đồng hồ để hỗ trợ tiêu hóa (I Love You massage).
+- **Lưng**: Đặt bé nằm sấp, vuốt dọc hai bên cột sống từ cổ xuống mông.`
   }
 ];
 
@@ -139,7 +169,7 @@ export async function initDbAndSeed() {
     }
 
     const articleCount = await pool.query('SELECT COUNT(*) FROM handbook_articles');
-    if (parseInt(articleCount.rows[0].count) < 6) {
+    if (parseInt(articleCount.rows[0].count) < 7) {
       await pool.query('DELETE FROM handbook_articles;');
       for (const article of defaultArticles) {
         await pool.query(`
@@ -192,3 +222,4 @@ export async function getArticleById(id: string): Promise<HandbookArticle | unde
     created_at: new Date(result.rows[0].created_at).toISOString(),
   } as HandbookArticle;
 }
+

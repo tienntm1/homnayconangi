@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
 import { getArticleById } from '@/lib/actions';
 import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
@@ -57,7 +58,7 @@ export default async function HandbookDetailPage({ params }: { params: { id: str
           )}
 
           <div className="prose prose-lg prose-blue max-w-none text-gray-700 font-medium">
-            <Markdown>{article.content}</Markdown>
+            <Markdown remarkPlugins={[remarkGfm]}>{article.content}</Markdown>
           </div>
         </div>
       </div>
