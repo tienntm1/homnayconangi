@@ -1,5 +1,5 @@
-'use server';
-import pool, { NutritiousMeal, HandbookArticle } from './db';
+const fs = require('fs');
+const path = require('path');
 
 const foodImages = [
   '1490645935967-10de6ba17061', '1504630083234-14187a9df0f5', '1494390248401-469b60efc6cd', 
@@ -32,7 +32,7 @@ for(let i=0; i<10; i++) {
     title: titles6_8[i],
     age_group: '01. Từ 6-8 tháng',
     image_url: foodImages[i],
-    ingredients: 'Thực phẩm sạch, rau củ quả tươi, sữa mẹ hoặc sữa công thức, nước dùng thanh ngọt.',
+    ingredients: 'Thực phẩm sạch, rau củ quả, sữa mẹ hoặc sữa công thức, nước dùng thanh ngọt.',
     benefits: 'Giúp bé tập nhai nuốt, làm quen với hương vị mới, cung cấp vitamin và khoáng chất thiết yếu.',
     instructions: '1. Rửa sạch các nguyên liệu.\\n2. Hấp chín hoặc luộc mềm.\\n3. Xay nhuyễn hoặc tán nhuyễn tuỳ theo độ thô bé ăn được.\\n4. Trộn chung với sữa hoặc nước dùng.'
   });
@@ -90,7 +90,7 @@ const articles = articlesData.map((a, i) => ({
   image_url: kidImages[i % kidImages.length],
   summary: 'Khám phá bí kíp và kiến thức khoa học được tổng hợp từ các chuyên gia hàng đầu để giúp quá trình làm mẹ trở nên nhẹ nhàng, tự tin hơn.',
   icon: a.icon,
-  content: `Dưới đây là những nội dung chi tiết về chủ đề **${a.title}**.
+  content: \`Dưới đây là những nội dung chi tiết về chủ đề **\${a.title}**.
 
 ### 1. Kiến thức cơ bản
 Chăm sóc trẻ em luôn đòi hỏi sự kiên nhẫn và khoa học. Mẹ cần hiểu rõ giai đoạn phát triển hiện tại của con để có những biện pháp phù hợp nhất. 
@@ -108,10 +108,11 @@ Trong mọi trường hợp, sự an toàn và khỏe mạnh của bé phải đ
 - Bước 2: Quan sát các phản ứng của bé, nếu bé hợp tác thì tiếp tục.
 - Bước 3: Đừng ngần ngại nhờ sự trợ giúp từ gia đình và người thân.
 
-*Chúc mẹ và bé luôn có những khoảnh khắc tuyệt vời bên nhau!*`
+*Chúc mẹ và bé luôn có những khoảnh khắc tuyệt vời bên nhau!*\`
 }));
 
-articles[3].content = `Theo dõi biểu đồ tăng trưởng là cách tốt nhất để biết bé có khỏe mạnh không. Dưới đây là bảng tiêu chuẩn của WHO:
+// Override content for WHO table
+articles[3].content = \`Theo dõi biểu đồ tăng trưởng là cách tốt nhất để biết bé có khỏe mạnh không. Dưới đây là bảng tiêu chuẩn của WHO:
 
 ### Bảng Chuẩn Bé Trai 👦
 | Tháng tuổi | Cân nặng (kg) | Chiều cao (cm) |
@@ -131,11 +132,18 @@ articles[3].content = `Theo dõi biểu đồ tăng trưởng là cách tốt nh
 | **2 tuổi** | 11.5 | 86.4 |
 | **3 tuổi** | 13.9 | 95.1 |
 
-> *Lưu ý: Sự dao động xung quanh mức trung bình (±10%) là hoàn toàn bình thường. Điều quan trọng là bé phát triển đều đặn theo đường cong sinh trưởng của riêng mình.*`;
+> *Lưu ý: Sự dao động xung quanh mức trung bình (±10%) là hoàn toàn bình thường. Điều quan trọng là bé phát triển đều đặn theo đường cong sinh trưởng của riêng mình.*\`;
+
+const fileContent = \`'use server';
+import pool, { NutritiousMeal, HandbookArticle } from './db';
+
+const defaultMeals = \${JSON.stringify(meals, null, 2)};
+
+const defaultArticles = \${JSON.stringify(articles, null, 2)};
 
 export async function initDbAndSeed() {
   try {
-    await pool.query(`
+    await pool.query(\\\`
       CREATE TABLE IF NOT EXISTS nutritious_meals (
           id VARCHAR(50) PRIMARY KEY,
           title VARCHAR(255) NOT NULL,
@@ -143,12 +151,13 @@ export async function initDbAndSeed() {
           ingredients TEXT NOT NULL,
           benefits TEXT NOT NULL,
           instructions TEXT NOT NULL,
-          image_url VARCHAR(500),
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
-    `);
+    \\\`);
     
-    await pool.query(`
+    await pool.query(\\\`ALTER TABLE nutritious_meals ADD COLUMN IF NOT EXISTS image_url VARCHAR(500) DEFAULT 'https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80';\\\`);
+
+    await pool.query(\\\`
       CREATE TABLE IF NOT EXISTS handbook_articles (
           id VARCHAR(50) PRIMARY KEY,
           title VARCHAR(255) NOT NULL,
@@ -156,36 +165,33 @@ export async function initDbAndSeed() {
           summary TEXT NOT NULL,
           content TEXT NOT NULL,
           icon VARCHAR(10),
-          image_url VARCHAR(500),
           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
-    `);
-
-    // Ensure columns exist just in case they were created in a previous version
-    await pool.query(`ALTER TABLE nutritious_meals ADD COLUMN IF NOT EXISTS image_url VARCHAR(500);`);
-    await pool.query(`ALTER TABLE handbook_articles ADD COLUMN IF NOT EXISTS image_url VARCHAR(500);`);
+    \\\`);
+    
+    await pool.query(\\\`ALTER TABLE handbook_articles ADD COLUMN IF NOT EXISTS image_url VARCHAR(500) DEFAULT 'https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80';\\\`);
 
     const mealCount = await pool.query('SELECT COUNT(*) FROM nutritious_meals');
     if (parseInt(mealCount.rows[0].count) < 30) {
       console.log('Clearing old data and reseeding massive dataset...');
       await pool.query('DELETE FROM nutritious_meals;');
       
-      for (const meal of meals) {
-        await pool.query(`
+      for (const meal of defaultMeals) {
+        await pool.query(\\\`
           INSERT INTO nutritious_meals (id, title, age_group, ingredients, benefits, instructions, image_url)
           VALUES ($1, $2, $3, $4, $5, $6, $7)
-        `, [meal.id, meal.title, meal.age_group, meal.ingredients, meal.benefits, meal.instructions, meal.image_url]);
+        \\\`, [meal.id, meal.title, meal.age_group, meal.ingredients, meal.benefits, meal.instructions, meal.image_url]);
       }
     }
 
     const articleCount = await pool.query('SELECT COUNT(*) FROM handbook_articles');
     if (parseInt(articleCount.rows[0].count) < 16) {
       await pool.query('DELETE FROM handbook_articles;');
-      for (const article of articles) {
-        await pool.query(`
+      for (const article of defaultArticles) {
+        await pool.query(\\\`
           INSERT INTO handbook_articles (id, title, category, summary, content, icon, image_url)
           VALUES ($1, $2, $3, $4, $5, $6, $7)
-        `, [article.id, article.title, article.category, article.summary, article.content, article.icon, article.image_url]);
+        \\\`, [article.id, article.title, article.category, article.summary, article.content, article.icon, article.image_url]);
       }
     }
   } catch (error) {
@@ -232,3 +238,7 @@ export async function getArticleById(id: string): Promise<HandbookArticle | unde
     created_at: new Date(result.rows[0].created_at).toISOString(),
   } as HandbookArticle;
 }
+\`;
+
+fs.writeFileSync(path.join(__dirname, '../lib/actions.ts'), fileContent);
+console.log('Successfully generated lib/actions.ts with massive unique data!');
