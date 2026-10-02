@@ -7,6 +7,7 @@ export interface NutritiousMeal {
   ingredients: string;
   benefits: string;
   instructions: string;
+  image_url: string;
   created_at: string;
 }
 
@@ -17,6 +18,7 @@ export interface HandbookArticle {
   summary: string;
   content: string;
   icon: string;
+  image_url: string;
   created_at: string;
 }
 
