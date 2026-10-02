@@ -1,7 +1,5 @@
-import Database from 'better-sqlite3';
-import path from 'path';
+import { Pool } from 'pg';
 
-// Define the Meal interface
 export interface Meal {
   id: string;
   date: string;
@@ -9,27 +7,29 @@ export interface Meal {
   food_name: string;
   amount: 'full' | 'half' | 'little' | 'none';
   note: string | null;
-  created_at: string;
-  updated_at: string;
+  created_at: Date | string;
+  updated_at: Date | string;
 }
 
-// In Next.js, the current working directory during dev/build is the project root
-const dbPath = path.join(process.cwd(), 'meals.db');
-const db = new Database(dbPath);
-db.pragma('journal_mode = WAL');
+const connectionString = 'postgresql://user_c11d1ed51ee0:Dl9wAeFWNE_4x86x5dIbuEOhdG6ueMcD@vibe.tinhgon.xyz:30005/postgresql_instance';
 
-// Initialize the database schema
-db.exec(`
+const pool = new Pool({
+  connectionString,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
+
+// Initialize database
+pool.query(`
   CREATE TABLE IF NOT EXISTS meals (
-      id TEXT PRIMARY KEY,
-      date TEXT NOT NULL,
-      time TEXT NOT NULL,
-      food_name TEXT NOT NULL,
-      amount TEXT NOT NULL,
+      id VARCHAR(50) PRIMARY KEY,
+      date VARCHAR(20) NOT NULL,
+      time VARCHAR(10) NOT NULL,
+      food_name VARCHAR(255) NOT NULL,
+      amount VARCHAR(20) NOT NULL,
       note TEXT,
-      created_at TEXT NOT NULL,
-      updated_at TEXT NOT NULL
+      created_at TIMESTAMP NOT NULL,
+      updated_at TIMESTAMP NOT NULL
   );
-`);
+`).catch(err => console.error('Error creating table:', err));
 
-export default db;
+export default pool;
