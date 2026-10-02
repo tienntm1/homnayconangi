@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
 
-const inter = Inter({ subsets: ["latin", "vietnamese"] });
+const nunito = Nunito({ 
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800", "900"]
+});
 
 export const metadata: Metadata = {
-  title: "Món Ngon Cho Bé",
-  description: "Cẩm nang thực đơn dinh dưỡng cho bé phát triển toàn diện",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+  title: "Mẹ & Bé Yêu - Cẩm Nang Chăm Sóc Bé",
+  description: "Nền tảng đa năng chăm sóc bé yêu toàn diện",
 };
 
 export default function RootLayout({
@@ -18,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <body className={`${inter.className} bg-gray-50 min-h-screen pb-10`}>
-        <Header />
-        <main className="max-w-md mx-auto p-4">
+      <body className={`${nunito.className} bg-[#fff5f7] min-h-screen text-gray-800 selection:bg-pink-200 selection:text-pink-900`}>
+        <Navbar />
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
           {children}
         </main>
       </body>

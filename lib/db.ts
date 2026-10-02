@@ -10,6 +10,16 @@ export interface NutritiousMeal {
   created_at: string;
 }
 
+export interface HandbookArticle {
+  id: string;
+  title: string;
+  category: string;
+  summary: string;
+  content: string;
+  icon: string;
+  created_at: string;
+}
+
 const connectionString = process.env.DATABASE_URL || 'postgresql://user_c11d1ed51ee0:Dl9wAeFWNE_4x86x5dIbuEOhdG6ueMcD@vays-db-e5047891-postgresql-5432:5432/homnayconangi_db';
 
 const pool = new Pool({
