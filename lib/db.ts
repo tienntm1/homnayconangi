@@ -22,6 +22,16 @@ export interface HandbookArticle {
   created_at: string;
 }
 
+// Dummy type for legacy components
+export interface Meal {
+  id: string;
+  food_name: string;
+  date: string;
+  time: string;
+  amount: string;
+  note: string;
+}
+
 const connectionString = process.env.DATABASE_URL || 'postgresql://user_c11d1ed51ee0:Dl9wAeFWNE_4x86x5dIbuEOhdG6ueMcD@vays-db-e5047891-postgresql-5432:5432/homnayconangi_db';
 
 const pool = new Pool({
