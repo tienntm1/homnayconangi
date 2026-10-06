@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, UtensilsCrossed, Star, ListChecks } from 'lucide-react';
 import { getMealById } from '@/lib/actions';
-import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,12 +25,11 @@ export default async function MealDetailPage({ params }: { params: { id: string 
         {/* Hero Image */}
         {meal.image_url && (
           <div className="relative h-64 md:h-80 w-full bg-gray-100">
-            <Image 
+            <img 
               src={meal.image_url} 
               alt={meal.title}
-              fill
-              className="object-cover"
-              priority
+              referrerPolicy="no-referrer"
+              className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             <div className="absolute bottom-6 left-6 right-6 text-white">

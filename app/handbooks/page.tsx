@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { BookHeart, ArrowRight } from 'lucide-react';
 import { getAllArticles } from '@/lib/actions';
-import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -26,11 +25,11 @@ export default async function HandbooksPage() {
             
             <div className="relative h-48 w-full bg-blue-50">
               {article.image_url && (
-                <Image 
+                <img 
                   src={article.image_url} 
                   alt={article.title}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  referrerPolicy="no-referrer"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
               )}
               <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm p-2 rounded-xl text-2xl shadow-sm">

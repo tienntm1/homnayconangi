@@ -4,7 +4,6 @@ import { ChevronLeft } from 'lucide-react';
 import { getArticleById } from '@/lib/actions';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,12 +24,11 @@ export default async function HandbookDetailPage({ params }: { params: { id: str
         
         {article.image_url ? (
           <div className="relative h-64 md:h-96 w-full bg-blue-50">
-            <Image 
+            <img 
               src={article.image_url} 
               alt={article.title}
-              fill
-              className="object-cover"
-              priority
+              referrerPolicy="no-referrer"
+              className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             <div className="absolute bottom-8 left-8 right-8 text-white">

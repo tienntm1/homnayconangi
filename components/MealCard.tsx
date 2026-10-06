@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Star } from 'lucide-react';
 import { NutritiousMeal } from '@/lib/db';
-import Image from 'next/image';
 
 export default function MealCard({ meal }: { meal: NutritiousMeal }) {
   return (
@@ -10,11 +9,11 @@ export default function MealCard({ meal }: { meal: NutritiousMeal }) {
       {/* Image Thumbnail */}
       <div className="relative h-48 w-full bg-gray-100 overflow-hidden">
         {meal.image_url ? (
-          <Image 
+          <img 
             src={meal.image_url} 
             alt={meal.title}
-            fill
-            className="object-cover group-hover:scale-110 transition-transform duration-500"
+            referrerPolicy="no-referrer"
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           />
         ) : (
           <div className="w-full h-full bg-pink-100 flex items-center justify-center text-pink-300">
