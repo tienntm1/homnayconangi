@@ -68,12 +68,15 @@ export default async function MealDetailPage({ params }: { params: { id: string 
                 Nguyên liệu
               </h2>
               <ul className="text-gray-700 leading-relaxed space-y-2 bg-gray-50 p-6 rounded-2xl border border-gray-100">
-                {meal.ingredients.split(',').map((ingredient, index) => (
-                  <li key={index} className="flex items-start gap-2">
+                {meal.ingredients.split('\n').map((ingredient, index) => {
+                  const text = ingredient.replace(/^-\s*/, '').trim();
+                  if (!text) return null;
+                  return (
+                    <li key={index} className="flex items-start gap-2">
                     <span className="text-orange-400 mt-0.5">•</span>
-                    <span className="font-medium">{ingredient.trim()}</span>
+                    <span className="font-medium">{text}</span>
                   </li>
-                ))}
+                )})}
               </ul>
             </div>
 
