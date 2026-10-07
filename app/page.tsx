@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { Baby, BookHeart, Utensils, ArrowRight, HeartPulse } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
-
 export default function Home() {
   return (
     <div className="space-y-12 pb-12">
