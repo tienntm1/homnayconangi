@@ -32,12 +32,12 @@ export interface Meal {
   note: string;
 }
 
-const connectionString = process.env.DATABASE_URL || 'postgresql://user_c11d1ed51ee0:Dl9wAeFWNE_4x86x5dIbuEOhdG6ueMcD@vays-db-e5047891-postgresql-5432:5432/homnayconangi_db';
+const connectionString = process.env.DATABASE_URL;
 
 let pool: Pool;
 try {
   pool = new Pool({
-    connectionString
+    connectionString: connectionString || undefined
   });
 } catch (e) {
   console.error("Failed to initialize database pool:", e);

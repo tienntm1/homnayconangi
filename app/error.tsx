@@ -8,16 +8,18 @@ export default function Error({
   reset: () => void
 }) {
   return (
-    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: 'red' }}>Application Error!</h1>
-      <p><strong>Error Message:</strong> {error.message}</p>
-      {error.digest && <p><strong>Digest:</strong> {error.digest}</p>}
-      <pre style={{ background: '#eee', padding: '1rem', overflowX: 'auto', maxWidth: '100%' }}>
-        {error.stack}
-      </pre>
-      <button onClick={() => reset()} style={{ padding: '0.5rem 1rem', marginTop: '1rem' }}>
-        Try again
-      </button>
+    <div className="min-h-[50vh] flex flex-col items-center justify-center p-6 text-center">
+      <div className="bg-white p-8 rounded-3xl shadow-sm border border-pink-100 max-w-md w-full">
+        <div className="text-4xl mb-4">🍼</div>
+        <h2 className="text-2xl font-bold text-gray-800 mb-2">Đã có lỗi xảy ra</h2>
+        <p className="text-gray-500 mb-6 text-sm">Hệ thống đang tạm thời gián đoạn. Mẹ vui lòng bấm thử lại hoặc quay lại trang chủ.</p>
+        <button
+          onClick={() => reset()}
+          className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-6 rounded-2xl shadow-md transition-all"
+        >
+          Thử lại
+        </button>
+      </div>
     </div>
   );
 }
