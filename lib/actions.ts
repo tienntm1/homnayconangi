@@ -17,20 +17,22 @@ const mealBases = [
 ];
 
 const foodImages = [
-  "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&q=80",
-  "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=800&q=80",
-  "https://images.unsplash.com/photo-1504630083234-14187a9df0f5?w=800&q=80",
-  "https://images.unsplash.com/photo-1481070414801-51fd732d7184?w=800&q=80",
-  "https://images.unsplash.com/photo-1493770348161-369560ae357d?w=800&q=80",
-  "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=800&q=80"
+  '/images/meal-1.jpg',
+  '/images/meal-2.jpg',
+  '/images/meal-3.jpg',
+  '/images/meal-4.jpg',
+  '/images/meal-5.jpg',
+  '/images/meal-6.jpg',
+  '/images/meal-7.jpg',
+  '/images/meal-8.jpg'
 ];
 
 const babyImages = [
-  "https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=800&q=80",
-  "https://images.unsplash.com/photo-1544126592-807ade215a0b?w=800&q=80",
-  "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=800&q=80",
-  "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&q=80",
-  "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=800&q=80"
+  '/images/baby-1.jpg',
+  '/images/baby-2.jpg',
+  '/images/baby-3.jpg',
+  '/images/baby-4.jpg',
+  '/images/baby-5.jpg'
 ];
 
 for (let i = 1; i <= 30; i++) {
@@ -104,7 +106,7 @@ export async function initDbAndSeed() {
     } else {
       const row = mealCheck.rows[0];
       const len = row.ingredients.length;
-      if (len < 100 || (row.image_url && row.image_url.includes('picsum.photos'))) { 
+      if (len < 100 || row.image_url !== foodImages[0]) { 
         needsReseed = true;
       }
     }
